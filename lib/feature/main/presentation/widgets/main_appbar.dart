@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vinyl_groove/app_ctrl.dart';
 import 'package:vinyl_groove/main.dart';
 
+import '../../../../core/theme/app_icon.dart';
 import '../../../notification/presentation/screens/alerts_screen.dart';
 
 class MainAppbar extends StatefulWidget implements PreferredSizeWidget {

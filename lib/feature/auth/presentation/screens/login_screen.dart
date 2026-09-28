@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:vinyl_groove/app_ctrl.dart';
+import 'package:vinyl_groove/core/test/login_validator.dart';
 import 'package:vinyl_groove/core/theme/app_input_style.dart';
 import 'package:vinyl_groove/core/theme/app_text_style.dart';
 import 'package:vinyl_groove/core/widget/app_input_field.dart';
@@ -26,51 +27,28 @@ class _LoginScreenState extends State<LoginScreen> {
   final em = TextEditingController();
   final pw = TextEditingController();
 
-  bool hide = false;
+  bool hide = true;
 
   String? emE;
   String? pwE;
 
   void _login() {
-    if (em.text.isEmpty) {
-      emE = '이메일은 필수 입니다.';
-      setState(() {});
+    final password = pw.text.trim();
+    final email = em.text.trim();
+
+    setState(() {
+      emE = LoginValidator.emailVerify(email);
+      pwE = LoginValidator.passwordVerify(password);
+    });
+
+    if (pwE != null || emE != null) {
       return;
     }
-    if (!RegExp(r'^[^.]*@.*\..*$').hasMatch(em.text)) {
-      emE = '이메일은 “@“ 포함 ”.“포함 ”@“ 앞에 ”.“사용 불가의 형식을 따릅니다.';
-
-      setState(() {});
-      return;
-    }
-    emE = null;
-    setState(() {});
-
-    if (pw.text.isEmpty) {
-      pwE = '비밀번호는 필수 입니다.';
-      setState(() {});
-      return;
-    }
-
-    if (pw.text.length < 6) {
-      pwE = '비밀번호는 6자 이상이어야 합니다.';
-      setState(() {});
-      return;
-    }
-
-    if (!RegExp(r'(?=.*[A-Z])(?=.*[a-z])').hasMatch(pw.text)) {
-      pwE = '비밀번호는 - 대문자 1자 이상 소문자 1자 이상의 형식을 따릅니다.';
-      setState(() {});
-      return;
-    }
-
-    pwE = null;
-    setState(() {});
 
     post(
       Uri.parse('http://${baseUrl}/auth/login/v2'),
       headers: baseHeader,
-      body: jsonEncode({"email": em.text, "password": pw.text}),
+      body: jsonEncode({"email": email, "password": password}),
     ).then((value) {
       final body = jsonDecode(value.body);
 

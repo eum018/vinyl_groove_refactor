@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vinyl_groove/main.dart' as app;
 import 'package:vinyl_groove/feature/album/widgets/album_card.dart';
+import 'package:integration_test/integration_test.dart';
 
 void main() async {
+
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
   int index = 0;
 
   sec(m, Future Function() act, WidgetTester tester) async {
@@ -27,6 +31,8 @@ void main() async {
     await tester.ensureVisible(f);
     await tester.pumpAndSettle();
   }
+
+
 
   testWidgets('test', (tester) async {
     await sec('애플리케이션 실행', () async {

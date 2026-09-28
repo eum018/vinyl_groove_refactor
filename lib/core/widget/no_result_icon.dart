@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vinyl_groove/main.dart';
 
 import '../theme/app_color.dart';
+import '../theme/app_icon.dart';
 import '../theme/app_text_style.dart';
 
 class NoResultIcon extends StatelessWidget {

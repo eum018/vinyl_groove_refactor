@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vinyl_groove/core/theme/app_color.dart';
 
-import '../../main.dart';
+import 'app_icon.dart';
 
 class AppInputStyle {
   AppInputStyle._();

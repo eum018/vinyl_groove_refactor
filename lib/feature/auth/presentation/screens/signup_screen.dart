@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:vinyl_groove/core/test/signup_validator.dart';
 import 'package:vinyl_groove/core/theme/app_input_style.dart';
 import 'package:vinyl_groove/core/theme/app_text_style.dart';
 import 'package:vinyl_groove/core/widget/app_back_button.dart';
@@ -65,71 +66,38 @@ class _SignupScreenState extends State<SignupScreen> {
       return;
     }
 
-    if (!RegExp(r'^[^.]*@.*\..*$').hasMatch(em.text)) {
-      emE = '이메일은 필수 값으로써 "@" 기호 포함 "." 기호 포함(도메인 영역에만)의 형식을 가집니다.';
-      setState(() {});
+    final email = em.text.trim();
+    final password = pw.text.trim();
+    final passwordConfirm = pw2.text.trim();
+    final name = na.text.trim();
+    final phone1 = ph1.text.trim();
+    final phone2 = ph2.text.trim();
+    final phone3 = ph3.text.trim();
 
+    setState(() {
+      emE = SignupValidator.emailVerify(email);
+      pwE = SignupValidator.passwordVerify(password);
+      pw2E = SignupValidator.passwordConfirmVerify(password, passwordConfirm);
+      naE = SignupValidator.nameVerify(name);
+      phE = SignupValidator.phoneVerify(phone1, phone2, phone3);
+    });
+
+    if (emE != name ||
+        pwE != null ||
+        pw2E != null ||
+        naE != null ||
+        phE != null) {
       return;
     }
-    emE = null;
-    setState(() {});
-    if (pw.text.length < 8) {
-      pwE = '비밀번호는 필수 값으로써 8자 이상이어야 합니다.';
-      setState(() {});
-      return;
-    }
-
-    if (!RegExp(r'(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*])')
-        .hasMatch(pw.text)) {
-      pwE = '비밀번호는 대/소문자, 숫자, 특수문자 각 1자 이상 포함해야 합니다.';
-      setState(() {});
-      return;
-    }
-    pwE = null;
-    setState(() {});
-    if (pw.text != pw2.text) {
-      pw2E = '비밀번호와 비밀번호 확인이 일치하지 않습니다.';
-      setState(() {});
-
-      return;
-    }
-    pw2E = null;
-    setState(() {});
-
-    if (na.text.isEmpty) {
-      naE = '이름은 필수 값입니다.';
-      setState(() {});
-
-      return;
-    }
-
-    if (RegExp(r'[^A-Za-zㄱ-ㅎㅏ-ㅣ가-힣]+').hasMatch(na.text)) {
-      naE = '이름은 필수 값으로써 한글 또는 영문만 입력 가능합니다.';
-      setState(() {});
-
-      return;
-    }
-    naE = null;
-    setState(() {});
-
-    if (RegExp(r'\D+').hasMatch(ph1.text) ||
-        RegExp(r'\D+').hasMatch(ph2.text) ||
-        RegExp(r'\D+').hasMatch(ph3.text)) {
-      phE = '휴대폰 번호는 숫자만 입력 가능합니다.';
-      setState(() {});
-      return;
-    }
-    phE = null;
-    setState(() {});
 
     post(
       Uri.parse('http://${baseUrl}/auth/signup'),
       headers: baseHeader,
       body: jsonEncode({
-        "email": em.text,
-        "password": pw.text,
-        "name": na.text,
-        "phone": "${ph1.text}-${ph2.text}-${ph3.text}",
+        "email": email,
+        "password": password,
+        "name": name,
+        "phone": "$phone1-$phone2-$phone3",
       }),
     ).then((value) {
       final body = jsonDecode(value.body);

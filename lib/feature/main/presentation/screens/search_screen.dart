@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:vinyl_groove/core/enum/condition.dart';
 import 'package:vinyl_groove/core/theme/app_color.dart';
 import 'package:vinyl_groove/core/theme/app_input_style.dart';
 import 'package:vinyl_groove/core/theme/app_text_style.dart';
@@ -10,6 +11,9 @@ import 'package:vinyl_groove/feature/main/presentation/widgets/filter_button.dar
 import 'package:vinyl_groove/feature/main/presentation/widgets/main_appbar.dart';
 
 import '../../../../app_ctrl.dart';
+import '../../../../core/enum/genre.dart';
+import '../../../../core/enum/sort.dart';
+import '../../../../core/enum/trade.dart';
 import '../../../../models/album_model.dart';
 import '../widgets/barcode_button.dart';
 
@@ -25,8 +29,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   final _controller = ScrollController();
 
-  List<String> gen = [''];
-  List<String> con = [''];
+  Set<Genre> gen = <Genre>{};
+  Set<Condition> con = <Condition>{};
   String trd = '';
   RangeValues pri = RangeValues(1000, 1000000);
 
@@ -52,16 +56,16 @@ class _SearchScreenState extends State<SearchScreen> {
     final res = await appCtrl.loadAlbums(
       sort: sort.v,
       conditions: con
-          .fold('', (previousValue, element) => previousValue + ',' + element)
+          .fold('', (previousValue, element) => '$previousValue,${element.v}')
           .replaceFirst(',', ''),
       genres: gen
-          .fold('', (previousValue, element) => previousValue + ',' + element)
+          .fold('', (previousValue, element) => '$previousValue,${element.v}')
           .replaceFirst(',', ''),
       keyword: text,
       maxPrice: pri.end.toInt(),
       minPrice: pri.start.toInt(),
       page: page,
-      size: 15,
+      size: 12,
       tradeMethod: trd,
     );
 
@@ -95,7 +99,7 @@ class _SearchScreenState extends State<SearchScreen> {
       }
     });
     if (appCtrl.gen != null) {
-      gen = [appCtrl.gen!.v];
+      gen = {appCtrl.gen!};
       appCtrl.gen = null;
     }
 
@@ -262,8 +266,8 @@ class _SearchScreenState extends State<SearchScreen> {
               style: TextButton.styleFrom(minimumSize: .zero, padding: .zero),
               onPressed: () {
                 setState(() {
-                  gen = [''];
-                  con = [''];
+                  gen.clear();
+                  con.clear();
                   trd = '';
                   pri = RangeValues(1000, 1000000);
                 });
@@ -283,24 +287,23 @@ class _SearchScreenState extends State<SearchScreen> {
               _filterLine(
                 label: '장르',
                 pref: FilterButton(
-                  selected: gen.contains(''),
+                  selected: gen.isEmpty,
                   onPressed: () {
                     setState(() {
-                      gen = [''];
+                      gen.clear();
                     });
                     load();
                   },
                   label: '잔체',
                 ),
                 items: Genre.values.map((e) {
-                  final act = gen.contains(e.v);
+                  final act = gen.isEmpty;
                   return FilterButton(
                     selected: act,
                     onPressed: () {
                       setState(() {
-                        gen.remove('');
                         if (!act) {
-                          gen.add(e.v);
+                          gen.add(e);
                         }
                       });
                       load();
@@ -314,30 +317,27 @@ class _SearchScreenState extends State<SearchScreen> {
               _filterLine(
                 label: '음반 상태',
                 pref: FilterButton(
-                  selected: con.contains(''),
+                  selected: con.isEmpty,
                   onPressed: () {
                     setState(() {
-                      con = [''];
+                      con.clear();
                     });
                     load();
                   },
                   label: '잔체',
                 ),
-                items: ['M', 'NM', 'VG+', 'VG', 'G'].map((e) {
+                items: Condition.getFilterList().map((e) {
                   final act = con.contains(e);
-                  ;
                   return FilterButton(
                     selected: act,
                     onPressed: () {
                       setState(() {
-                        con.remove('');
-
                         if (!act) {
                           con.add(e);
                         }
                       });
                     },
-                    label: e == 'M' ? 'Mint' : e,
+                    label: Condition.getFilterLabel(e),
                   );
                 }).toList(),
               ),

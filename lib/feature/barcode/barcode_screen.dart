@@ -7,6 +7,7 @@ import 'package:vinyl_groove/core/theme/app_text_style.dart';
 import 'package:vinyl_groove/core/widget/base_scaffold.dart';
 import 'package:vinyl_groove/core/widget/submit_button.dart';
 
+import '../../core/theme/app_icon.dart';
 import '../../core/theme/app_input_style.dart';
 import '../../main.dart';
 
@@ -248,9 +249,6 @@ class _BarcodeScreenState extends State<BarcodeScreen> {
                 builder: (context, value, child) {
                   double w = 20;
                   double h = 3;
-
-
-
 
                   return AnimatedScale(
                     duration: Duration(milliseconds: 1200),

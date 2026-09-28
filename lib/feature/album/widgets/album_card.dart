@@ -57,7 +57,7 @@ class AlbumCard extends StatelessWidget {
                             borderRadius: .circular(4),
                           ),
                           padding: .symmetric(vertical: 4, horizontal: 8),
-                          child: AppTextStyle.medium10().text(album.condition),
+                          child: AppTextStyle.medium10().text(album.condition.v),
                         ),
                       ),
                     ),

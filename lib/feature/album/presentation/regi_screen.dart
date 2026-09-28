@@ -16,6 +16,9 @@ import 'package:vinyl_groove/core/widget/base_scaffold.dart';
 import 'package:vinyl_groove/core/widget/submit_button.dart';
 import 'package:vinyl_groove/feature/main/presentation/widgets/filter_button.dart';
 
+import '../../../core/enum/condition.dart';
+import '../../../core/enum/genre.dart';
+import '../../../core/enum/trade.dart';
 import '../../../main.dart';
 
 class RegiScreen extends StatefulWidget {
@@ -37,7 +40,7 @@ class _RegiScreenState extends State<RegiScreen> {
   final de = TextEditingController();
 
   Genre? gen = .ROCK;
-  Con? con = .SS;
+  Condition? con = .SS;
   Trade? trd = .DIRECT;
 
   String? imE;
@@ -212,7 +215,7 @@ class _RegiScreenState extends State<RegiScreen> {
                           child: Wrap(
                             spacing: 6,
                             runSpacing: 6,
-                            children: Con.values.map((e) {
+                            children: Condition.values.map((e) {
                               final act = con == e;
                               return FilterButton(
                                 selected: act,
@@ -375,21 +378,6 @@ class _RegiScreenState extends State<RegiScreen> {
       ),
     );
   }
-}
-
-enum Con {
-  SS('SS', '미개봉 새상품'),
-  M('M', 'Mint - 완벽한 상태'),
-  NM('NM', 'Near Mint - 거의 새것'),
-  EX('EX', 'Excellent - 약간의 사용감'),
-  VG_P('VG+', 'Very Good+ - 양호'),
-  VG('VG', 'Very Good - 사용감 있음'),
-  G('G', 'Good - 재생 가능');
-
-  final String v;
-  final String l;
-
-  const new(this.v, this.l);
 }
 
 class _Section extends StatelessWidget {

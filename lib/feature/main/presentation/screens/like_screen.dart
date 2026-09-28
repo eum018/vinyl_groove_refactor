@@ -9,6 +9,7 @@ import 'package:vinyl_groove/core/widget/no_result_icon.dart';
 import 'package:vinyl_groove/models/album_model.dart';
 
 import '../../../../core/theme/app_color.dart';
+import '../../../../core/theme/app_icon.dart';
 import '../../../../main.dart';
 import '../../../album/presentation/album_screen.dart';
 
@@ -175,7 +176,7 @@ class _LikeAlbumTileState extends State<_LikeAlbumTile> {
                                     horizontal: 8,
                                   ),
                                   child: Text(
-                                    e.condition,
+                                    e.condition.v,
                                     overflow: .ellipsis,
 
                                     style: TextStyle(

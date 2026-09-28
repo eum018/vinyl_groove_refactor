@@ -11,6 +11,8 @@ import 'package:vinyl_groove/feature/main/presentation/widgets/main_appbar.dart'
 import 'package:vinyl_groove/feature/main/presentation/widgets/barcode_button.dart';
 import 'package:vinyl_groove/feature/main/presentation/widgets/recode_widget.dart';
 
+import '../../../../core/enum/genre.dart';
+import '../../../../core/enum/sort.dart';
 import '../../../../main.dart';
 import '../../../nav_screen.dart';
 

@@ -5,6 +5,7 @@ import 'package:vinyl_groove/app_ctrl.dart';
 import 'package:vinyl_groove/core/theme/app_color.dart';
 import 'package:vinyl_groove/core/widget/base_scaffold.dart';
 
+import '../core/theme/app_icon.dart';
 import '../main.dart';
 import 'album/presentation/regi_screen.dart';
 import 'main/presentation/screens/home_screen.dart';

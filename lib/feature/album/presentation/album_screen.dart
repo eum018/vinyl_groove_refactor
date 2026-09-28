@@ -158,7 +158,7 @@ class _AlbumScreenState extends State<AlbumScreen> {
                     FilterButton(
                       selected: false,
                       onPressed: null,
-                      label: album.condition,
+                      label: album.condition.v,
                     ),
                     FilterButton(
                       selected: false,
@@ -236,7 +236,7 @@ class _AlbumScreenState extends State<AlbumScreen> {
 
                 padding: .symmetric(vertical: 4, horizontal: 8),
                 child: Text(
-                  album.condition,
+                  album.condition.v,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,

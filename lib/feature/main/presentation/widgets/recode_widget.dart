@@ -6,6 +6,7 @@ import 'package:vinyl_groove/feature/main/presentation/widgets/filter_button.dar
 import 'package:vinyl_groove/main.dart';
 
 import '../../../../app_ctrl.dart';
+import '../../../../core/enum/sort.dart';
 import '../../../../core/theme/app_color.dart';
 import '../../../../models/album_model.dart';
 import '../../../album/presentation/album_screen.dart';

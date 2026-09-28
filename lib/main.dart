@@ -1,10 +1,6 @@
-import 'dart:convert';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vinyl_groove/app_ctrl.dart';
 
@@ -21,8 +17,9 @@ void main() async {
 
   appCtrl.init();
 
-  cameras = await availableCameras();
-
+  try {
+    cameras = await availableCameras();
+  } catch (e) {}
   runApp(MaterialApp(home: LoginScreen()));
 }
 
@@ -53,49 +50,4 @@ extension QB on BuildContext {
   );
 
   void back([r]) => Navigator.pop(this, r);
-}
-
-enum AppIcon {
-  edit('edit.svg'),
-  finger('finger-print.svg'),
-  help('help.svg'),
-  history('history.svg'),
-  info('info.svg'),
-  inventory('inventory.svg'),
-  pin('pin-number-pad.svg'),
-  shopping('shopping-bag.svg'),
-  delete('delete.svg'),
-  add('add.svg'),
-  album('album.svg'),
-  barcode('barcode-scan.svg'),
-  chevron('chevron-right.svg'),
-  classical('classical.svg'),
-  electronic('electronic.svg'),
-  email('email.svg'),
-  etc('etc.svg'),
-  heart('heart.svg'),
-  hip('hip-hop.svg'),
-  home('home.svg'),
-  jazz('jazz.svg'),
-  lock('lock.svg'),
-  mypage('mypage.svg'),
-  notification('notification.svg'),
-  person('person.svg'),
-  pop('pop.svg'),
-  rnb('rnb-soul.svg'),
-  rock('rock.svg'),
-  search('search.svg'),
-  visibility('visibility.svg'),
-  visibilityoff('visibility-off.svg');
-
-  final String p;
-
-  const new(this.p);
-
-  SvgPicture icon({Color? color, double? size}) => SvgPicture.asset(
-    'assets/icons/$p',
-    width: size,
-    height: size,
-    color: color,
-  );
 }

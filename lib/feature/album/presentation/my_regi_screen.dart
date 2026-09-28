@@ -9,6 +9,7 @@ import 'package:vinyl_groove/core/theme/app_text_style.dart';
 import 'package:vinyl_groove/core/widget/app_appbar.dart';
 import 'package:vinyl_groove/core/widget/app_confirm_dialog.dart';
 
+import '../../../core/theme/app_icon.dart';
 import '../../../main.dart';
 import '../../../models/album_model.dart';
 import 'album_screen.dart';
@@ -146,7 +147,7 @@ class _MyRegiScreenState extends State<MyRegiScreen> {
                             padding: .symmetric(vertical: 4, horizontal: 8),
                             child: AppTextStyle.medium10(
                               color: AppColor.whiteL1,
-                            ).text(e.condition),
+                            ).text(e.condition.v),
                           ),
                           AppTextStyle.bold15(color: AppColor.yellow)
                               .text(NumberFormat('₩#,###').format(e.price)),

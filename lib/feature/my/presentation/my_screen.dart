@@ -9,6 +9,7 @@ import 'package:vinyl_groove/core/widget/base_scaffold.dart';
 import 'package:vinyl_groove/feature/my/presentation/pin_screen.dart';
 import 'package:vinyl_groove/feature/my/widget/base_simple_login_page.dart';
 
+import '../../../core/theme/app_icon.dart';
 import '../../../main.dart';
 import '../../album/presentation/album_screen.dart';
 import '../../album/presentation/my_regi_screen.dart';

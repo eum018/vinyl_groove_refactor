@@ -1,11 +1,14 @@
-import '../app_ctrl.dart';
+import 'package:vinyl_groove/core/enum/condition.dart';
+
+import '../core/enum/genre.dart';
+import '../core/enum/trade.dart';
 
 class AlbumModel {
   final int id;
   final String albumName;
   final String artist;
   final Genre genre;
-  final String condition;
+  final Condition condition;
   final int price;
   final Trade tradeMethod;
   final String albumImage;
@@ -26,21 +29,19 @@ class AlbumModel {
   });
 
   factory AlbumModel.from(j) => AlbumModel(
-    id: j['id'],
-    albumName: j['albumName'],
-    artist: j['artist'],
-    genre: Genre.values.firstWhere((element) => element.v == j['genre']),
-    condition: j['condition'],
-    price: j['price'],
-    tradeMethod: Trade.values.firstWhere(
-      (element) => element.v == j['tradeMethod'],
-    ),
-    albumImage: j['albumImage'],
+    id: j['id'] ?? '',
+    albumName: j['albumName'] ?? '',
+    artist: j['artist'] ?? '',
+    genre: Genre.fromCode(j['genre']) ?? .ETC,
+    condition: j['condition'] ?? '',
+    price: j['price'] ?? 0,
+    tradeMethod: Trade.fromCode(j['tradeMethod']) ?? .BOTH,
+    albumImage: j['albumImage'] ?? '',
     likeCount: j['likeCount'] ?? 0,
-    createdAt: j['createdAt'],
+    createdAt: j['createdAt'] ?? '',
   );
 
-  toJson() => {
+  Map<String, Object> toJson() => {
     'id': id,
     'albumName': albumName,
     'artist': artist,

@@ -5,8 +5,9 @@ import 'package:http/http.dart';
 import 'package:vinyl_groove/main.dart';
 import 'package:vinyl_groove/models/album_model.dart';
 
-const keyL = 'keyL';
+import 'core/enum/genre.dart';
 
+const keyL = 'keyL';
 
 final appCtrl = AppCtrl();
 
@@ -100,43 +101,4 @@ class AppCtrl {
 
         message((body['errors'] as List?)?.firstOrNull['message']);
       }, onError: (e) => message('서버 통신 에러'));
-}
-
-enum Genre {
-  ROCK('ROCK', 'Rock', .rock),
-  JAZZ('JAZZ', 'Jazz', .jazz),
-  POP('POP', 'Pop', .pop),
-  HIPHOP('HIPHOP', 'Hip-Hop', .hip),
-  ELECTRONIC('ELECTRONIC', 'Electronic', .electronic),
-  CLASSICAL('CLASSICAL', 'Classical', .classical),
-  RNB_SOUL('RNB_SOUL', 'R&B/Soul', AppIcon.rnb),
-  ETC('ETC', 'Etc', .etc);
-
-  final String v;
-  final String l;
-  final AppIcon i;
-
-  const Genre(this.v, this.l, this.i);
-}
-
-enum Sort {
-  popular('popular', '인기 매물'),
-  recent('recent', '최신 등록'),
-  price_asc('price_asc', '가격 인하');
-
-  final String v;
-  final String l;
-
-  const new(this.v, this.l);
-}
-
-enum Trade {
-  DIRECT('DIRECT', '직거래'),
-  DELIVERY('DELIVERY', '택배'),
-  BOTH('BOTH', '둘 다');
-
-  final String v;
-  final String l;
-
-  const new(this.v, this.l);
 }

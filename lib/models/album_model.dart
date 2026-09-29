@@ -33,7 +33,7 @@ class AlbumModel {
     albumName: j['albumName'] ?? '',
     artist: j['artist'] ?? '',
     genre: Genre.fromCode(j['genre']) ?? .ETC,
-    condition: j['condition'] ?? '',
+    condition: Condition.fromCode(j['condition']) ?? .M,
     price: j['price'] ?? 0,
     tradeMethod: Trade.fromCode(j['tradeMethod']) ?? .BOTH,
     albumImage: j['albumImage'] ?? '',

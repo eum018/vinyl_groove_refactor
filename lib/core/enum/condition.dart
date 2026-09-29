@@ -19,4 +19,8 @@ enum Condition {
   static String getFilterLabel(Condition con) {
     return con == .M ? "Mint" : con.v;
   }
+
+  static Condition? fromCode(String code) {
+    return Condition.values.where((element) => element.v == code).firstOrNull;
+  }
 }

@@ -13,7 +13,7 @@ enum Condition {
   const new(this.v, this.l);
 
   static List<Condition> getFilterList() {
-    return [.M, .NM, .VG_P, .G];
+    return [.M, .NM, .VG_P, .VG, .G];
   }
 
   static String getFilterLabel(Condition con) {

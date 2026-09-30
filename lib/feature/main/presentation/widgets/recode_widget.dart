@@ -234,7 +234,7 @@ class _RecodeWidgetState extends State<RecodeWidget>
                                       .text(e.artist, overflow: .ellipsis),
                                   AppTextStyle.bold12(color: AppColor.whiteL3)
                                       .text(
-                                        '${e.genre.l} • ${e.condition}',
+                                        '${e.genre.l} • ${e.condition.v}',
                                         overflow: .ellipsis,
                                       ),
                                 ],

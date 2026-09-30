@@ -82,7 +82,7 @@ class _SignupScreenState extends State<SignupScreen> {
       phE = SignupValidator.phoneVerify(phone1, phone2, phone3);
     });
 
-    if (emE != name ||
+    if (emE != null ||
         pwE != null ||
         pw2E != null ||
         naE != null ||

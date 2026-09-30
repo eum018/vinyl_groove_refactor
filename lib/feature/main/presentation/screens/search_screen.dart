@@ -297,7 +297,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   label: '잔체',
                 ),
                 items: Genre.values.map((e) {
-                  final act = gen.isEmpty;
+                  final act = gen.contains(e);
                   return FilterButton(
                     selected: act,
                     onPressed: () {

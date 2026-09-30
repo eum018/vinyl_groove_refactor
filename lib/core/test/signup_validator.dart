@@ -37,7 +37,7 @@ class SignupValidator {
       return '이름은 필수 값입니다.';
     }
 
-    if (!_name.hasMatch(str1)) {
+    if (_name.hasMatch(str1)) {
       return '이름은 필수 값으로써 한글 또는 영문만 입력 가능합니다.';
     }
 

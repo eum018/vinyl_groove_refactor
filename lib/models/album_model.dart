@@ -46,7 +46,7 @@ class AlbumModel {
     'albumName': albumName,
     'artist': artist,
     'genre': genre.v,
-    'condition': condition,
+    'condition': condition.v,
     'price': price,
     'tradeMethod': tradeMethod.v,
     'albumImage': albumImage,
